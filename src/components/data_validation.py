@@ -38,15 +38,27 @@ class DataValidation:
                 raise ValueError("Dataset is empty.")
 
             # Required Columns
-            missing_columns = [
+            missing_required_columns = [
                 column
                 for column in self.config.required_columns
                 if column not in df.columns
             ]
 
-            if missing_columns:
+            if missing_required_columns:
                 raise ValueError(
-                    f"Missing Columns: {missing_columns}"
+                    f"Missing Required Columns: {missing_required_columns}"
+                )
+
+            # Optional Columns
+            missing_optional_columns = [
+                column
+                for column in self.config.optional_columns
+                if column not in df.columns
+            ]
+
+            if missing_optional_columns:
+                logger.warning(
+                    f"Missing Optional Columns: {missing_optional_columns}"
                 )
 
             # Validation Report
@@ -56,7 +68,8 @@ class DataValidation:
                 "total_columns": len(df.columns),
                 "missing_values": int(df.isnull().sum().sum()),
                 "duplicate_rows": int(df.duplicated().sum()),
-                "required_columns_present": True
+                "required_columns_present": True,
+                "missing_optional_columns": missing_optional_columns,
             }
 
             os.makedirs(self.config.root_dir, exist_ok=True)
@@ -64,7 +77,7 @@ class DataValidation:
             with open(
                 self.config.validation_report_path,
                 "w",
-                encoding="utf-8"
+                encoding="utf-8",
             ) as file:
                 json.dump(report, file, indent=4, ensure_ascii=False)
 
@@ -73,7 +86,7 @@ class DataValidation:
             return DataValidationArtifact(
                 validation_status=True,
                 validated_data_path=self.config.data_path,
-                validation_report_path=self.config.validation_report_path
+                validation_report_path=self.config.validation_report_path,
             )
 
         except Exception as e:

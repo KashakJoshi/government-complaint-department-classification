@@ -29,6 +29,7 @@ from src.entity.config_entity import (
 class ConfigurationManager:
     """
     Central Configuration Manager
+    Reads all YAML files once and provides configuration objects.
     """
 
     def __init__(self):
@@ -77,6 +78,7 @@ class ConfigurationManager:
             data_path="data/raw/dataset.csv",
             validation_report_path=f"{artifact.root_dir}/data_validation/validation_report.json",
             required_columns=self.config["dataset"]["required_columns"],
+            optional_columns=self.config["dataset"]["optional_columns"],
             file_extension=self.config["dataset"]["file_extension"],
         )
 

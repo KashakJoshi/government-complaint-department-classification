@@ -25,6 +25,7 @@ class DataValidationConfig:
     data_path: str
     validation_report_path: str
     required_columns: list[str]
+    optional_columns: list[str]
     file_extension: str
 
 

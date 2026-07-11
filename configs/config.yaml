@@ -37,9 +37,46 @@ data_cleaning:
   department_column: department_name
 
 feature_engineering:
-  output_file: data/processed/processed_dataset.csvimage.png
+  output_file: data/processed/processed_dataset.csv
   label_encoder_path: artifacts/feature_engineering/label_encoder.pkl
 
   complaint_column: complaint
   location_column: location
   department_column: department
+
+text_input:
+  max_text_length: 5000
+  min_text_length: 3
+  accepted_input_type: "text"
+  remove_leading_trailing_spaces: true
+  convert_to_string: true
+
+ocr:
+  supported_formats:
+    - jpg
+    - jpeg
+    - png
+
+  languages:
+    - en
+    - hi
+
+  use_gpu: false
+
+  min_image_size: 50
+  max_image_size: 10000
+
+hindi_nlp:
+
+  normalize_spaces: true
+
+  normalize_tabs: true
+
+  normalize_newlines: true
+  remove_special_characters: true
+  evaluate_numbers: true
+  analyze_stopwords: true
+  evaluate_stemming: true
+  evaluate_lemmatization: true
+
+  output_file: data/processed/hindi_preprocessed_dataset.csv

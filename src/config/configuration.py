@@ -17,8 +17,11 @@ from src.entity.config_entity import (
     DataValidationConfig,
     DataCleaningConfig,
     FeatureEngineeringConfig,
+    TextInputConfig,
     ModelConfig,
+    OCRConfig,
     TrainingConfig,
+    HindiNLPConfig,
     PreprocessingConfig,
     InferenceConfig,
     DataPathConfig,
@@ -107,6 +110,46 @@ class ConfigurationManager:
             complaint_column=feature["complaint_column"],
             location_column=feature["location_column"],
             department_column=feature["department_column"],
+        )
+        
+    def get_text_input_config(self) -> TextInputConfig:
+
+        text_config = self.config["text_input"]
+
+        return TextInputConfig(
+            max_text_length=text_config["max_text_length"],
+            min_text_length=text_config["min_text_length"],
+            accepted_input_type=text_config["accepted_input_type"],
+            remove_leading_trailing_spaces=text_config["remove_leading_trailing_spaces"],
+            convert_to_string=text_config["convert_to_string"],
+        )    
+        
+    def get_hindi_nlp_config(self) -> HindiNLPConfig:
+
+        hindi_nlp = self.config["hindi_nlp"]
+
+        return HindiNLPConfig(
+            normalize_spaces=hindi_nlp["normalize_spaces"],
+            normalize_tabs=hindi_nlp["normalize_tabs"],
+            normalize_newlines=hindi_nlp["normalize_newlines"],
+            output_file=hindi_nlp["output_file"],
+            remove_special_characters=hindi_nlp["remove_special_characters"],
+            evaluate_numbers=hindi_nlp["evaluate_numbers"],
+            analyze_stopwords=hindi_nlp["analyze_stopwords"],
+            evaluate_stemming=hindi_nlp["evaluate_stemming"],
+            evaluate_lemmatization=hindi_nlp["evaluate_lemmatization"],
+        )
+
+    def get_ocr_config(self) -> OCRConfig:
+
+        ocr = self.config["ocr"]
+
+        return OCRConfig(
+            supported_formats=ocr["supported_formats"],
+            languages=ocr["languages"],
+            use_gpu=ocr["use_gpu"],
+            min_image_size=ocr["min_image_size"],
+            max_image_size=ocr["max_image_size"],
         )
 
     def get_model_config(self) -> ModelConfig:

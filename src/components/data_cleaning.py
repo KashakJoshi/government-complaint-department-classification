@@ -16,11 +16,11 @@ class DataCleaning:
 
     def __init__(self, config: DataCleaningConfig):
         self.config = config
-
+        print("DATA CLEANING INIT")
         self.location_extractor = LocationExtractor(
             "data/external/location_dictionary.txt"
         )
-
+        print(self.location_extractor.locations)
     def clean_data(self, dataframe: pd.DataFrame) -> pd.DataFrame:
 
         try:
@@ -65,26 +65,14 @@ class DataCleaning:
                 df[self.config.complaint_column]
                 .apply(self.normalize_text)
             )
-
-            # Language Detection
-            df["language"] = (
-                df[self.config.complaint_column]
-                .apply(self.detect_language)
-            )
-
-            # Location Extraction
-            df["location"] = (
-                df[self.config.sender_column]
-                .apply(self.location_extractor.extract_location)
-            )
+            
+        
 
             # Final Dataset
             final_df = pd.DataFrame(
                 {
-                    "location": df["location"],
                     "complaint": df[self.config.complaint_column],
                     "department": df[self.config.department_column],
-                    "language": df["language"],
                 }
             )
 

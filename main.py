@@ -1,19 +1,31 @@
+from src.config.configuration import ConfigurationManager
+from src.components.data_cleaning import DataCleaning
+from src.components.hindi_nlp import HindiNLP
+
 import pandas as pd
 
-from src.config.configuration import ConfigurationManager
-from src.components.feature_engineering import FeatureEngineering
+
+config = ConfigurationManager()
 
 
-if __name__ == "__main__":
+# Data Cleaning Phase
+data_cleaning_config = config.get_data_cleaning_config()
 
-    config = ConfigurationManager()
+data_cleaning = DataCleaning(data_cleaning_config)
 
-    feature_config = config.get_feature_engineering_config()
+raw_df = pd.read_csv(
+    "data/raw/dataset.csv"
+)
 
-    df = pd.read_csv("data/interim/cleaned_dataset.csv")
+cleaned_df = data_cleaning.clean_data(raw_df)
 
-    feature_engineering = FeatureEngineering(feature_config)
 
-    processed_df = feature_engineering.engineer_features(df)
+# Hindi NLP Phase
+hindi_nlp_config = config.get_hindi_nlp_config()
 
-    print(processed_df.head().to_markdown(index=False))
+hindi_nlp = HindiNLP(hindi_nlp_config)
+
+processed_df = hindi_nlp.process(cleaned_df)
+
+
+print(processed_df.head())

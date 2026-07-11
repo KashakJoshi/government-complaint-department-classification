@@ -38,6 +38,33 @@ class DataCleaningConfig:
     remove_null_complaints: bool
     remove_null_departments: bool
     
+@dataclass(frozen=True)
+class TextInputConfig:
+    max_text_length: int
+    min_text_length: int
+    accepted_input_type: str
+    remove_leading_trailing_spaces: bool
+    convert_to_string: bool    
+    
+@dataclass(frozen=True)
+class OCRConfig:
+    supported_formats: list
+    languages: list
+    use_gpu: bool
+    min_image_size: int
+    max_image_size: int    
+    
+@dataclass(frozen=True)
+class HindiNLPConfig:
+    normalize_spaces: bool
+    normalize_tabs: bool
+    normalize_newlines: bool
+    output_file: str
+    remove_special_characters: bool   
+    evaluate_numbers: bool 
+    analyze_stopwords: bool
+    evaluate_stemming: bool
+    evaluate_lemmatization: bool
     
 @dataclass(frozen=True)
 class FeatureEngineeringConfig:

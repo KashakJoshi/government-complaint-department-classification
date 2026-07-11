@@ -1,50 +1,50 @@
-Pithoragarh
-Gangolihat
-Didihat
-Dharchula
-Munsiyari
-Berinag
-Kanalichhina
-Munakot
-Lohaghat
-Champawat
-Askot
-Jauljibi
-Thal
-Ogla
-Bungachina
-Bastari
-Devtung
-Kanadhar
-Sunyura
-Gurna
-Jhulaghat
-Bangapani
-Nachni
-Madkot
-Tejam
-Didihat Bazar
-Gangolihat Bazar
-Berinag Bazar
-Dharchula Bazar
-Munsiyari Bazar
-Pankhu
-Bans
-Bhatkot
-Sandev
-Pipli
-Sera
-Balwakot
-Punyagiri
-Chandak
-Aincholi
-Kumdar
-Didihat Road
-Gangolihat Road
-Kanalichhina Block
-Gangolihat Block
-Berinag Block
-Didihat Block
-Munsiyari Block
-Dharchula Block
-Munakot Block
+Pithoragarh=पिथौरागढ़
+Gangolihat=गंगोलीहाट
+Didihat=डीडीहाट
+Dharchula=धारचूला
+Munsiyari=मुनस्यारी
+Berinag=बेरीनाग
+Kanalichhina=कनालीछीना
+Munakot=मुनाकोट
+Lohaghat=लोहाघाट
+Champawat=चम्पावत
+Askot=अस्कोट
+Jauljibi=जौलजीबी
+Thal=थल
+Ogla=ओगला
+Bungachina=बूंगाछीना
+Bastari=बस्तारी
+Devtung=देवतूंग
+Kanadhar=कनाधार
+Sunyura=सुन्यूरा
+Gurna=गुर्ना
+Jhulaghat=झूलाघाट
+Bangapani=बंगापानी
+Nachni=नाचनी
+Madkot=मदकोट
+Tejam=तेजम
+Didihat Bazar=डीडीहाट बाजार
+Gangolihat Bazar=गंगोलीहाट बाजार
+Berinag Bazar=बेरीनाग बाजार
+Dharchula Bazar=धारचूला बाजार
+Munsiyari Bazar=मुनस्यारी बाजार
+Pankhu=पाँखू
+Bans=बाँस
+Bhatkot=भाटकोट
+Sandev=सानदेव
+Pipli=पिपली
+Sera=सेरा
+Balwakot=बलुवाकोट
+Punyagiri=पूर्णागिरि
+Chandak=चंडाक
+Aincholi=ऐंचोली
+Kumdar=कुमदार
+Didihat Road=डीडीहाट रोड
+Gangolihat Road=गंगोलीहाट रोड
+Kanalichhina Block=कनालीछीना ब्लॉक
+Gangolihat Block=गंगोलीहाट ब्लॉक
+Berinag Block=बेरीनाग ब्लॉक
+Didihat Block=डीडीहाट ब्लॉक
+Munsiyari Block=मुनस्यारी ब्लॉक
+Dharchula Block=धारचूला ब्लॉक
+Munakot Block=मुनाकोट ब्लॉक

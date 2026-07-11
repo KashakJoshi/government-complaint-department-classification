@@ -1,0 +1,10 @@
+model:
+  name: bert-base-multilingual-cased
+  max_length: 128
+  num_labels: 0
+
+tokenizer:
+  do_lower_case: false
+
+training:
+  device: auto

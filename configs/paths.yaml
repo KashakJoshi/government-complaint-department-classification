@@ -1,0 +1,22 @@
+artifacts:
+  root_dir: artifacts
+
+data:
+  raw_dir: data/raw
+  interim_dir: data/interim
+  processed_dir: data/processed
+  external_dir: data/external
+
+models:
+  model_dir: models
+  model_file: models/model.pkl
+  tokenizer_dir: models/tokenizer
+
+logs:
+  log_dir: logs
+
+reports:
+  report_dir: reports
+
+notebooks:
+  notebook_dir: notebooks

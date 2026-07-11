@@ -1,0 +1,13 @@
+project:
+  name: Government Complaint Department Classification
+  version: 1.0.0
+  author: Kashak Joshi
+
+logging:
+  log_dir: logs
+  log_level: INFO
+
+artifacts:
+  root_dir: artifacts
+
+random_seed: 42

@@ -1,0 +1,19 @@
+training:
+  train_size: 0.85
+  test_size: 0.15
+  random_state: 42
+
+  batch_size: 16
+  learning_rate: 2e-5
+  epochs: 5
+  weight_decay: 0.01
+  warmup_ratio: 0.1
+
+preprocessing:
+  remove_duplicates: true
+  remove_null_values: true
+  normalize_unicode: true
+  remove_extra_spaces: true
+
+inference:
+  top_k: 1

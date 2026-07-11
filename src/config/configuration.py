@@ -15,6 +15,8 @@ from src.entity.config_entity import (
     LoggingConfig,
     ArtifactConfig,
     DataValidationConfig,
+    DataCleaningConfig,
+    FeatureEngineeringConfig,
     ModelConfig,
     TrainingConfig,
     PreprocessingConfig,
@@ -80,6 +82,31 @@ class ConfigurationManager:
             required_columns=self.config["dataset"]["required_columns"],
             optional_columns=self.config["dataset"]["optional_columns"],
             file_extension=self.config["dataset"]["file_extension"],
+        )
+        
+    def get_data_cleaning_config(self) -> DataCleaningConfig:
+
+        cleaning = self.config["data_cleaning"]
+
+        return DataCleaningConfig(
+            output_file=cleaning["output_file"],
+            complaint_column=cleaning["complaint_column"],
+            sender_column=cleaning["sender_column"],
+            department_column=cleaning["department_column"],
+            remove_duplicates=cleaning["remove_duplicates"],
+            remove_null_complaints=cleaning["remove_null_complaints"],
+            remove_null_departments=cleaning["remove_null_departments"],
+    )
+    def get_feature_engineering_config(self) -> FeatureEngineeringConfig:
+
+        feature = self.config["feature_engineering"]
+
+        return FeatureEngineeringConfig(
+            output_file=feature["output_file"],
+            label_encoder_path=feature["label_encoder_path"],
+            complaint_column=feature["complaint_column"],
+            location_column=feature["location_column"],
+            department_column=feature["department_column"],
         )
 
     def get_model_config(self) -> ModelConfig:

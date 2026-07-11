@@ -15,15 +15,31 @@ random_seed: 42
 dataset:
   file_extension: ".csv"
 
-dataset:
-  file_extension: ".csv"
-
   required_columns:
+    - post_title
     - post_description
     - department_name
 
   optional_columns:
     - post_id
-    - post_title
     - department_id
     - label
+
+data_cleaning:
+  output_file: data/interim/cleaned_dataset.csv
+
+  remove_duplicates: true
+  remove_null_complaints: true
+  remove_null_departments: true
+
+  complaint_column: post_description
+  sender_column: post_title
+  department_column: department_name
+
+feature_engineering:
+  output_file: data/processed/processed_dataset.csvimage.png
+  label_encoder_path: artifacts/feature_engineering/label_encoder.pkl
+
+  complaint_column: complaint
+  location_column: location
+  department_column: department

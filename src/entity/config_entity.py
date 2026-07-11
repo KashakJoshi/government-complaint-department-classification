@@ -27,6 +27,25 @@ class DataValidationConfig:
     required_columns: list[str]
     optional_columns: list[str]
     file_extension: str
+    
+@dataclass(frozen=True)
+class DataCleaningConfig:
+    output_file: str
+    complaint_column: str
+    sender_column: str
+    department_column: str
+    remove_duplicates: bool
+    remove_null_complaints: bool
+    remove_null_departments: bool
+    
+    
+@dataclass(frozen=True)
+class FeatureEngineeringConfig:
+    output_file: str
+    label_encoder_path: str
+    complaint_column: str
+    location_column: str
+    department_column: str    
 
 
 @dataclass(frozen=True)

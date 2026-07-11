@@ -1,15 +1,19 @@
+import pandas as pd
+
 from src.config.configuration import ConfigurationManager
-from src.components.data_validation import DataValidation
+from src.components.feature_engineering import FeatureEngineering
 
 
 if __name__ == "__main__":
 
     config = ConfigurationManager()
 
-    validation_config = config.get_data_validation_config()
+    feature_config = config.get_feature_engineering_config()
 
-    validation = DataValidation(validation_config)
+    df = pd.read_csv("data/interim/cleaned_dataset.csv")
 
-    artifact = validation.validate_dataset()
+    feature_engineering = FeatureEngineering(feature_config)
 
-    print(artifact)
+    processed_df = feature_engineering.engineer_features(df)
+
+    print(processed_df.head().to_markdown(index=False))

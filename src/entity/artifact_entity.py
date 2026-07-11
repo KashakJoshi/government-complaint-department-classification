@@ -3,6 +3,7 @@ from dataclasses import dataclass
 
 @dataclass(frozen=True)
 class DataValidationArtifact:
+    validation_status: bool
     validated_data_path: str
     validation_report_path: str
 

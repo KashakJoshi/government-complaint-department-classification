@@ -20,6 +20,15 @@ class ArtifactConfig:
 
 
 @dataclass(frozen=True)
+class DataValidationConfig:
+    root_dir: str
+    data_path: str
+    validation_report_path: str
+    required_columns: list[str]
+    file_extension: str
+
+
+@dataclass(frozen=True)
 class ModelConfig:
     model_name: str
     max_length: int

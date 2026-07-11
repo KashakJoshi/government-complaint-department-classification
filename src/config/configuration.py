@@ -1,13 +1,20 @@
-import os
 import sys
 
 from src.utils.common import read_yaml
 from src.exception.exception import CustomException
 
+from src.constants.constants import (
+    CONFIG_FILE,
+    MODEL_CONFIG_FILE,
+    PARAMS_FILE,
+    PATHS_FILE,
+)
+
 from src.entity.config_entity import (
     ProjectConfig,
     LoggingConfig,
     ArtifactConfig,
+    DataValidationConfig,
     ModelConfig,
     TrainingConfig,
     PreprocessingConfig,
@@ -22,22 +29,19 @@ from src.entity.config_entity import (
 class ConfigurationManager:
     """
     Central Configuration Manager
-    Reads all YAML files once and provides configuration objects.
     """
 
     def __init__(self):
-
         try:
-
-            self.config = read_yaml("configs/config.yaml")
-            self.model = read_yaml("configs/model.yaml")
-            self.params = read_yaml("configs/params.yaml")
-            self.paths = read_yaml("configs/paths.yaml")
+            self.config = read_yaml(CONFIG_FILE)
+            self.model = read_yaml(MODEL_CONFIG_FILE)
+            self.params = read_yaml(PARAMS_FILE)
+            self.paths = read_yaml(PATHS_FILE)
 
         except Exception as e:
             raise CustomException(e, sys)
 
-    def get_project_config(self):
+    def get_project_config(self) -> ProjectConfig:
 
         project = self.config["project"]
 
@@ -47,7 +51,7 @@ class ConfigurationManager:
             author=project["author"],
         )
 
-    def get_logging_config(self):
+    def get_logging_config(self) -> LoggingConfig:
 
         logging = self.config["logging"]
 
@@ -56,7 +60,7 @@ class ConfigurationManager:
             log_level=logging["log_level"],
         )
 
-    def get_artifact_config(self):
+    def get_artifact_config(self) -> ArtifactConfig:
 
         artifact = self.config["artifacts"]
 
@@ -64,7 +68,19 @@ class ConfigurationManager:
             root_dir=artifact["root_dir"],
         )
 
-    def get_model_config(self):
+    def get_data_validation_config(self) -> DataValidationConfig:
+
+        artifact = self.get_artifact_config()
+
+        return DataValidationConfig(
+            root_dir=f"{artifact.root_dir}/data_validation",
+            data_path="data/raw/dataset.csv",
+            validation_report_path=f"{artifact.root_dir}/data_validation/validation_report.json",
+            required_columns=self.config["dataset"]["required_columns"],
+            file_extension=self.config["dataset"]["file_extension"],
+        )
+
+    def get_model_config(self) -> ModelConfig:
 
         model = self.model["model"]
         tokenizer = self.model["tokenizer"]
@@ -78,7 +94,7 @@ class ConfigurationManager:
             device=training["device"],
         )
 
-    def get_training_config(self):
+    def get_training_config(self) -> TrainingConfig:
 
         training = self.params["training"]
 
@@ -93,7 +109,7 @@ class ConfigurationManager:
             warmup_ratio=training["warmup_ratio"],
         )
 
-    def get_preprocessing_config(self):
+    def get_preprocessing_config(self) -> PreprocessingConfig:
 
         preprocessing = self.params["preprocessing"]
 
@@ -104,7 +120,7 @@ class ConfigurationManager:
             remove_extra_spaces=preprocessing["remove_extra_spaces"],
         )
 
-    def get_inference_config(self):
+    def get_inference_config(self) -> InferenceConfig:
 
         inference = self.params["inference"]
 
@@ -112,7 +128,7 @@ class ConfigurationManager:
             top_k=inference["top_k"],
         )
 
-    def get_data_paths(self):
+    def get_data_paths(self) -> DataPathConfig:
 
         data = self.paths["data"]
 
@@ -123,7 +139,7 @@ class ConfigurationManager:
             external_dir=data["external_dir"],
         )
 
-    def get_model_paths(self):
+    def get_model_paths(self) -> ModelPathConfig:
 
         model = self.paths["models"]
 
@@ -133,7 +149,7 @@ class ConfigurationManager:
             tokenizer_dir=model["tokenizer_dir"],
         )
 
-    def get_report_paths(self):
+    def get_report_paths(self) -> ReportPathConfig:
 
         reports = self.paths["reports"]
 
@@ -141,7 +157,7 @@ class ConfigurationManager:
             report_dir=reports["report_dir"],
         )
 
-    def get_notebook_paths(self):
+    def get_notebook_paths(self) -> NotebookPathConfig:
 
         notebook = self.paths["notebooks"]
 

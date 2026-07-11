@@ -11,3 +11,14 @@ artifacts:
   root_dir: artifacts
 
 random_seed: 42
+
+dataset:
+  file_extension: ".csv"
+
+  required_columns:
+    - post_id
+    - post_title
+    - post_description
+    - department_id
+    - department_name
+    - label

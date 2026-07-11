@@ -37,11 +37,9 @@ data_cleaning:
   department_column: department_name
 
 feature_engineering:
-  output_file: data/processed/processed_dataset.csv
-  label_encoder_path: artifacts/feature_engineering/label_encoder.pkl
-
+  output_file: artifacts/features/features.pt
+  label_encoder_path: artifacts/features/label_encoder.pkl
   complaint_column: complaint
-  location_column: location
   department_column: department
 
 text_input:

@@ -71,8 +71,7 @@ class FeatureEngineeringConfig:
     output_file: str
     label_encoder_path: str
     complaint_column: str
-    location_column: str
-    department_column: str    
+    department_column: str   
 
 
 @dataclass(frozen=True)

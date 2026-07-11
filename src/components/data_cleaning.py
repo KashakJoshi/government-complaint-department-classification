@@ -73,8 +73,11 @@ class DataCleaning:
                 {
                     "complaint": df[self.config.complaint_column],
                     "department": df[self.config.department_column],
+                    "label": df["label"],
                 }
             )
+            
+            print(df["label"].isna().sum())
 
             os.makedirs(
                 os.path.dirname(self.config.output_file),

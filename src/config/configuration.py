@@ -100,18 +100,26 @@ class ConfigurationManager:
             remove_null_complaints=cleaning["remove_null_complaints"],
             remove_null_departments=cleaning["remove_null_departments"],
     )
-    def get_feature_engineering_config(self) -> FeatureEngineeringConfig:
+    def get_feature_engineering_config(self):
 
-        feature = self.config["feature_engineering"]
+        try:
 
-        return FeatureEngineeringConfig(
-            output_file=feature["output_file"],
-            label_encoder_path=feature["label_encoder_path"],
-            complaint_column=feature["complaint_column"],
-            location_column=feature["location_column"],
-            department_column=feature["department_column"],
-        )
-        
+            feature_engineering = self.config["feature_engineering"]
+
+            return FeatureEngineeringConfig(
+
+                output_file=feature_engineering["output_file"],
+
+                label_encoder_path=feature_engineering["label_encoder_path"],
+
+                complaint_column=feature_engineering["complaint_column"],
+
+                department_column=feature_engineering["department_column"],
+            )
+
+        except Exception as e:
+
+            raise CustomException(e, sys)
     def get_text_input_config(self) -> TextInputConfig:
 
         text_config = self.config["text_input"]

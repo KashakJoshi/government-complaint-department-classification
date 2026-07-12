@@ -99,3 +99,21 @@ http://127.0.0.1:8000/docs
 ```
 
 From Swagger UI, text, image and audio complaint predictions can be tested.
+
+
+
+## Model Download
+
+The trained model files are stored separately due to their large size.
+
+Download the trained model from the link below:
+
+[https://www.icloud.com/iclouddrive/090-qjiYuKS9H7r4Ey2m5WQ2Q#models
+]
+
+After downloading, place the model folder inside the project directory as:
+
+models/
+
+
+

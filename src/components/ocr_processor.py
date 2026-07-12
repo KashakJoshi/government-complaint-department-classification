@@ -1,34 +1,41 @@
-import pytesseract
-from PIL import Image
+import easyocr
 
 from src.predict import predict_department
 
+
+# =========================
+# Load EasyOCR Model
+# =========================
+
+reader = easyocr.Reader(
+    ['hi', 'en'],
+    gpu=False
+)
+
+
+# =========================
+# Image To Text
+# =========================
+
 def image_to_text(image_path):
 
-    try:
+    results = reader.readtext(
+        image_path
+    )
 
-        image = Image.open(image_path)
+    text_list = []
 
-        text = pytesseract.image_to_string(
-            image,
-            lang="eng"
-        )
+    for result in results:
+        text_list.append(result[1])
 
-        if not text.strip():
-            raise ValueError(
-                "No text detected from image"
-            )
+    text = " ".join(text_list)
 
-        return text
+    return text.strip()
 
 
-    except Exception as e:
-
-        raise Exception(
-            f"OCR processing failed: {str(e)}"
-        )
-
-
+# =========================
+# Complete OCR Pipeline
+# =========================
 
 def process_image(image_path):
 
@@ -38,18 +45,18 @@ def process_image(image_path):
             image_path
         )
 
-        result = predict_department(
+        prediction = predict_department(
             text
         )
 
         return {
             "text": text,
-            "prediction": result
+            "prediction": prediction
         }
 
 
     except Exception as e:
 
         return {
-            "error": str(e)
+            "error": f"OCR processing failed: {str(e)}"
         }

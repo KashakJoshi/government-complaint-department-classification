@@ -2,57 +2,43 @@ import whisper
 
 from src.predict import predict_department
 
-whisper_model = whisper.load_model("tiny")
+
+# =========================
+# Load Whisper Base
+# =========================
+
+whisper_model = whisper.load_model("base")
 
 
-
-def get_whisper_model():
-
-    global whisper_model
-
-    if whisper_model is None:
-
-        whisper_model = whisper.load_model(
-            "tiny"
-        )
-
-    return whisper_model
-
-
+# =========================
+# Audio To Text
+# =========================
 
 def audio_to_text(audio_path):
 
-    try:
+    result = whisper_model.transcribe(
+        audio_path,
+        language="hi",
+        task="transcribe",
+        fp16=False,
+        temperature=0,
+        condition_on_previous_text=False,
+        initial_prompt="यह हिंदी भाषा में एक सरकारी शिकायत है। कृपया केवल हिंदी देवनागरी में लिखें।"
+    )
 
-        model = get_whisper_model()
+    print("Detected Language:", result.get("language"))
 
+    text = result["text"]
+    print("RAW TEXT:")
 
-        result = model.transcribe(
-            audio_path,
-            language="hi"
-        )
+    print(repr(text))
 
-
-        text = result["text"].strip()
-
-
-        if not text:
-
-            raise ValueError(
-                "No speech detected in audio"
-            )
-
-
-        return text
+    return text.strip()
 
 
-    except Exception as e:
-
-        raise Exception(
-            f"Audio processing failed: {str(e)}"
-        )
-
-
+# =========================
+# Complete Audio Pipeline
+# =========================
 
 def process_audio(audio_path):
 
@@ -62,11 +48,9 @@ def process_audio(audio_path):
             audio_path
         )
 
-
         prediction = predict_department(
             text
         )
-
 
         return {
             "text": text,
@@ -77,5 +61,5 @@ def process_audio(audio_path):
     except Exception as e:
 
         return {
-            "error": str(e)
+            "error": f"Audio processing failed: {str(e)}"
         }

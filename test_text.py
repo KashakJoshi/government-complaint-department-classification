@@ -1,12 +1,12 @@
 from src.components.input_router import process_input
 
 
-audio_path = "data/input/test_audio.mpeg"
+image_path = "data/input/test_image.jpg"
 
 
 response = process_input(
-    "audio",
-    audio_path
+    "image",
+    image_path
 )
 
 

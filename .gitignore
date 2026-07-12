@@ -1,48 +1,22 @@
-# Virtual Environment
 venv/
-
-# Python
-__pycache__/
-*.py[cod]
-*.so
-
-# Environment Variables
 .env
 
-# Jupyter
-.ipynb_checkpoints/
+__pycache__/
+*.pyc
 
-# VS Code
-.vscode/
-
-# macOS
 .DS_Store
 
-# Logs
-logs/
+.ipynb_checkpoints/
+
 *.log
 
-# Artifacts
-artifacts/
+temp/
+tmp/
 
-# Models
-models/
+test_*.py
 
-# Temporary Files
-*.tmp
-*.temp
+data/input/*
+data/interim/*
 
-# Build
-build/
-dist/
-*.egg-info/
-
-# Testing
-.pytest_cache/
-.coverage
-
-# Cache
-.cache/
-
-# Misc
-*.swp
+.vscode/
+.idea/

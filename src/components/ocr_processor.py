@@ -1,8 +1,7 @@
 import pytesseract
 from PIL import Image
 
-from predict import predict_department
-
+from src.predict import predict_department
 
 def image_to_text(image_path):
 

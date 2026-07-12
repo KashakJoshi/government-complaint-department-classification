@@ -1,9 +1,8 @@
 import whisper
 
-from predict import predict_department
+from src.predict import predict_department
 
-
-whisper_model = None
+whisper_model = whisper.load_model("tiny")
 
 
 

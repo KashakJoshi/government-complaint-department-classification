@@ -3,8 +3,7 @@ import torch.nn.functional as F
 import json
 import os
 
-from load_model import load_model
-
+from src.load_model import load_model
 
 # Load model once
 model, tokenizer, device = load_model()

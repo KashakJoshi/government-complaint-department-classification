@@ -2,12 +2,12 @@ import os
 import torch
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
+# ==========================
+# Paths
+# ==========================
 
-# current file: Complaint_Classifier/src/load_model.py
 SRC_DIR = os.path.dirname(os.path.abspath(__file__))
-
 PROJECT_DIR = os.path.dirname(SRC_DIR)
-
 
 MODEL_PATH = os.path.join(
     PROJECT_DIR,
@@ -21,43 +21,80 @@ TOKENIZER_PATH = os.path.join(
     "tokenizer"
 )
 
-
 NUM_LABELS = 92
 
+# ==========================
+# Global Variables
+# ==========================
 
-device = torch.device(
-    "cuda" if torch.cuda.is_available() else "cpu"
-)
+model = None
+tokenizer = None
+device = None
 
+# ==========================
+# Load Model
+# ==========================
 
 def load_model():
 
-    print("MODEL PATH:", MODEL_PATH)
-    print("TOKENIZER PATH:", TOKENIZER_PATH)
+    global model
+    global tokenizer
+    global device
 
+    if model is not None:
+        return model, tokenizer, device
 
-    tokenizer = AutoTokenizer.from_pretrained(
-        "bert-base-multilingual-cased"
+    print("=" * 60)
+    print("Loading BERT Model...")
+    print("=" * 60)
+
+    device = torch.device(
+        "cuda" if torch.cuda.is_available() else "cpu"
     )
 
+    print(f"Device: {device}")
+    print(f"MODEL PATH: {MODEL_PATH}")
+    print(f"TOKENIZER PATH: {TOKENIZER_PATH}")
+
+    tokenizer = AutoTokenizer.from_pretrained(
+        TOKENIZER_PATH
+    )
 
     model = AutoModelForSequenceClassification.from_pretrained(
         "bert-base-multilingual-cased",
         num_labels=NUM_LABELS
     )
 
-
     checkpoint = torch.load(
         MODEL_PATH,
         map_location=device
     )
 
+    print("\nCheckpoint Type:")
+    print(type(checkpoint))
 
-    model.load_state_dict(checkpoint)
+    print("\nClassifier Keys in Checkpoint:")
+    print([k for k in checkpoint.keys() if "classifier" in k])
+
+    print("\nLoading state_dict...\n")
+
+    missing, unexpected = model.load_state_dict(
+        checkpoint,
+        strict=False
+    )
+
+    print("=" * 60)
+    print("Missing Keys:")
+    print(missing)
+
+    print("=" * 60)
+    print("Unexpected Keys:")
+    print(unexpected)
+    print("=" * 60)
 
     model.to(device)
     model.eval()
 
-    print("Model loaded successfully")
+    print("Model Loaded Successfully")
 
     return model, tokenizer, device
